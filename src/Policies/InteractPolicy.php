@@ -49,7 +49,7 @@ class InteractPolicy
         if (! $this->feature->tags()) return $authorizations;
 
         return $authorizations
-            ->filter(fn (Agent\Authorization $authorization) => ! $this->tagWildCarded($authorization) || $authorization->tags()->intersect($tags)->isNotEmpty());
+            ->filter(fn (Agent\Authorization $authorization) => $this->tagWildCarded($authorization) || $authorization->tags()->intersect($tags)->isNotEmpty());
     }
 
     protected function tagWildCarded(Agent\Authorization $authorization): bool
